@@ -3,7 +3,6 @@ import time
 
 def writeVersionToFile(version):
     f = open("versions.txt", "w")
-    f.truncate(0)
     f.write(version)
 
 def readVersionsFile():
@@ -16,8 +15,9 @@ res = requests.get(url)
 
 
 while res.status_code == 200:
-    if res.text == "versions.txt":
+    if res.text == readVersionsFile():
         print("No updates")
+        time.sleep(60)
     
     else:
         print("Update found! update: {0}".format(res.text))
